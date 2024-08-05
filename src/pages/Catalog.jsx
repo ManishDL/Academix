@@ -25,16 +25,16 @@ function Catalog() {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
         console.log("response",res);
         const r = res?.data?.data;
-        // console.log("Data response : ",r);
+        console.log("Data response : ",r);
         const category_id = res?.data?.data?.filter(
-          (ct) => (ct.name.trim().toLowerCase() === catalogName.trim().toLowerCase())
-        )[0]._id;
+          (ct) => ct.name === catalogName.replace(/-/g, ' ')
+        )[0]?._id;
 
         console.log("manish",category_id);
         setCategoryId(category_id)
       } catch (error) {
         console.log("Could not fetch Categories.", error)
-      } 
+      }
     })()
   }, [catalogName])
   useEffect(() => {
